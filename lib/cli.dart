@@ -1,5 +1,9 @@
 class CLI{
 
+  CLI._();
+
+  
+
   static messageUse()=> """
   How to use:
 

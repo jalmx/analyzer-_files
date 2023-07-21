@@ -9,4 +9,4 @@ Parámetros
 - recursivo -r --recursive
 - archivo de salida (default: stdout) -json -csv -sqlite (future: html, may be)
 - hash (default: sha256) -md5, -sha256, -all
-- 
+- exclude (default: "") *.txt node_module .gitignore
