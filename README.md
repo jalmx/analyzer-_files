@@ -5,7 +5,7 @@ en caso que existan repetidos, lo indica en un archivo, con su nombre y ruta, lo
 
 Parámetros
 
-- default(./) <path> file or directory
+- default(./) <path> directory
 - recursivo -r --recursive
 - archivo de salida (default: stdout) -json -csv -sqlite (future: html, may be)
 - hash (default: sha256) -md5, -sha256, -all
