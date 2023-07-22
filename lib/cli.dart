@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as Path;
 import 'package:args/args.dart';
 
 class CLI {
@@ -21,6 +22,7 @@ class CLI {
 
   void _build() {
     _parse = ArgParser()
+    ..addFlag("help", negatable: false, help: "Provide help")
       ..addOption(path,
           defaultsTo: ".",
           abbr: "p",
@@ -40,7 +42,7 @@ class CLI {
         "sha256": "Hash SHA256",
         "all": "Apply all hashes"
       })
-      ..addOption(exclude,
+      ..addMultiOption(exclude,
           abbr: "x",
           help: "List of folders or files to exclude in search",
           valueHelp: "node_module,.gitignore")
@@ -62,13 +64,25 @@ class CLI {
           });
   }
 
+  String _getPath(String? mPath) {
+    if (_results.rest.isNotEmpty) {
+      if (mPath == ".") {
+        return Directory.current.absolute.path;
+      } else {
+        return mPath!;
+      }
+    }
+    return Directory.current.absolute.path;
+  }
+
   Map<String, dynamic> getParameter() {
     return <String, dynamic>{
-      path: _results.rest.firstOrNull ?? Directory.current.path,
+      path: _getPath(_results.rest.firstOrNull),
       recursive: _results[recursive],
       hash: _results[hash],
       exclude: _results[exclude] ?? _results[exclude],
-      output: _results[output]
+      output: _results[output],
+      "help": _results["help"] as bool
     };
   }
 
