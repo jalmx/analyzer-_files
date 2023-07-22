@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:args/args.dart';
 
 class CLI {
@@ -62,12 +64,12 @@ class CLI {
 
   Map<String, dynamic> getParameter() {
     return <String, dynamic>{
-      path: (_results[path] as String),
+      path: _results.rest.firstOrNull ?? Directory.current.path,
       recursive: _results[recursive],
       hash: _results[hash],
-      exclude: _results[exclude] ?? _results[exclude] ,
+      exclude: _results[exclude] ?? _results[exclude],
       output: _results[output]
-      };
+    };
   }
 
   String usage() => _parse.usage;
