@@ -3,10 +3,39 @@
 Busca todos los archivos, obtiene su hash, lo almacena y compara todos los archivos para ver si existe repetidos
 en caso que existan repetidos, lo indica en un archivo, con su nombre y ruta, los que son iguales en su hash
 
-Parámetros
+## How to use
 
-- default(./) <path> directory
-- recursivo -r --recursive
-- archivo de salida (default: stdout) -json -csv -sqlite (future: html, may be)
-- hash (default: sha256) -md5, -sha256, -all
-- exclude (default: "") *.txt node_module .gitignore
+
+```bash
+# It will search inside the path and exclude all files .gitignore and archivo.txt
+analyzer  <path> -x ".gitignore,archivo.txt" -r
+```
+
+```bash
+# It will search inside the path and exclude all files .gitignore and folder node_modules
+analyzer <path> -x ".gitignore,node_modules" -r
+```
+
+
+## Help
+
+```bash
+    --help                                Provide help
+-p, --path=</home/>                       path to search
+                                          (defaults to ".")
+-r, --recursive                           Search into directory
+-h, --hash                                
+          [all]                           Apply all hashes
+          [md5]                           Hash MD5
+          [sha256] (default)              Hash SHA256
+
+-x, --exclude=<node_module,.gitignore>    List of folders or files to exclude in search
+                                          Example
+                                           -x "node_module,.gitignore,*.txt"
+-o, --output=<csv>                        Type of file to save the information
+
+          [csv]                           Save file csv
+          [json]                          Save file array json
+          [sqlite]                        Save in db SQLite
+          [stdout] (default)              Throw to terminal
+```

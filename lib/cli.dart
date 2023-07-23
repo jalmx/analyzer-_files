@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:path/path.dart' as Path;
 import 'package:args/args.dart';
 
 class CLI {
@@ -44,8 +43,9 @@ class CLI {
       })
       ..addMultiOption(exclude,
           abbr: "x",
-          help: "List of folders or files to exclude in search",
-          valueHelp: "node_module,.gitignore")
+          help: "List of folders or files to exclude in search\nExample\n -x \"node_module,.gitignore,*.txt\"",
+          valueHelp: "node_module,.gitignore",
+          )
       ..addOption(output,
           defaultsTo: "stdout",
           abbr: "o",
@@ -80,7 +80,7 @@ class CLI {
       path: _getPath(_results.rest.firstOrNull),
       recursive: _results[recursive],
       hash: _results[hash],
-      exclude: _results[exclude] ?? _results[exclude],
+      exclude: _results[exclude],
       output: _results[output],
       "help": _results["help"] as bool
     };
