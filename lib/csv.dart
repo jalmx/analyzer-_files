@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:analyzer_file/row_csv.dart';
+
 // ignore_for_file: non_constant_identifier_names
 
+/// For test
 void main(List<String> args) {
   final CSV my_csv = CSV();
 
@@ -13,10 +16,11 @@ void main(List<String> args) {
         id: "${Random().nextInt(500)}",
         idHash: "${Random().nextInt(1000)}ABC",
         firstElementPath: "path uno${Random().nextInt(500)}",
-        firstElementName: "elemnent ${Random().nextInt(500)}",
+        firstElementName: "elemennto ${Random().nextInt(500)}",
         secondElementPath: "path dos ${Random().nextInt(500)}",
         secondElementName: "elemento ${Random().nextInt(500)}"));
   }
+  
   my_csv.saveTitle();
   my_csv.saveContent(rows);
 }
@@ -39,16 +43,24 @@ class CSV {
 
   Future<bool> _save(String content, {bool overwrite = false}) async {
     final csv = File(pathToSave);
+
     await csv.writeAsString(content,
-        mode: overwrite ? FileMode.writeOnlyAppend : FileMode.write);
+        mode: overwrite ? FileMode.write : FileMode.writeOnlyAppend);
     return true;
   }
 
+/// Documentation for _listToString
+/// parse the list to String, clear brackets []
+///
   String _listToString(RowCSV row) {
     String content = row.toList.toString().replaceRange(0, 1, "");
     return content.replaceRange(content.length - 1, null, "");
   }
 
+/// Documentation for saveContent
+/// > * _`@param: [List<RowCSV>]`_ - rows:
+///
+/// > _`@returns: [bool]`_
   Future<bool> saveContent(List<RowCSV> rows) async {
     String content = "";
     for (final row in rows) {
@@ -67,58 +79,12 @@ class CSV {
         secondElementPath: RowCSV.SECOND_PATH,
         secondElementName: RowCSV.SECOND_NAME);
 
-    String content = _listToString(row);
-    await _save(content, overwrite: true);
-    return true;
+    try {
+      String content = _listToString(row);
+      await _save("$content\n");
+      return true;
+    } catch (_) {
+      return false;
+    }
   }
-}
-
-/// class for the row of csv file
-class RowCSV {
-  static final String ID = "id";
-  static final String ID_HASH = "id_hash";
-  static final String FIRST_PATH = "first_path";
-  static final String FIRST_NAME = "first_name";
-  static final String SECOND_PATH = "second_path";
-  static final String SECOND_NAME = "second_name";
-
-  final String id;
-  final String idHash;
-  final String firstElementPath;
-  final String firstElementName;
-  final String secondElementPath;
-  final String secondElementName;
-
-  RowCSV({
-    required this.id,
-    required this.idHash,
-    required this.firstElementPath,
-    required this.firstElementName,
-    required this.secondElementPath,
-    required this.secondElementName,
-  });
-
-  List<String> get toList => [
-        id,
-        idHash,
-        firstElementPath,
-        firstElementName,
-        secondElementPath,
-        secondElementName
-      ];
-
-  Map<String, String> toMap() {
-    return {
-      ID: id,
-      ID_HASH: idHash,
-      FIRST_PATH: firstElementPath,
-      FIRST_NAME: firstElementName,
-      SECOND_PATH: secondElementPath,
-      SECOND_NAME: secondElementName
-    };
-  }
-
-  @override
-  String toString() =>
-      "$id, $idHash, $firstElementPath, $firstElementName, $secondElementPath, $secondElementName";
 }
