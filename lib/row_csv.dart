@@ -1,4 +1,3 @@
-
 /// class for the row of csv file
 class RowCSV {
   static final String ID = "id";
@@ -43,6 +42,14 @@ class RowCSV {
       SECOND_NAME: secondElementName
     };
   }
+
+  static RowCSV get getTitleRow => RowCSV(
+      id: ID,
+      idHash: ID_HASH,
+      firstElementPath: FIRST_PATH,
+      firstElementName: FIRST_NAME,
+      secondElementPath: SECOND_PATH,
+      secondElementName: SECOND_NAME);
 
   @override
   String toString() =>
