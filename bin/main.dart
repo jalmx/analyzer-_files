@@ -30,7 +30,9 @@ void main(List<String> arguments) async {
 
           bool result = await Comparator.isEqual(
               pathFileOne: elements[0], pathFileTwo: elements[1]);
-          stdout.write("\r.");
+          //stdout.write("\r.");
+          print(getMD5("${elements[0]}${elements[1]}"));
+          
           if (result) {
             stdout.write(getMD5("${elements[0]}${elements[1]} -"));
             print(" el archivo ${elements[0]} <-> ${elements[1]}");
