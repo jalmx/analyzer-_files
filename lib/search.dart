@@ -2,8 +2,6 @@
 
 import 'dart:io';
 
-import 'package:path/path.dart' as Path;
-
 /// Test this class
 void main(List<String> arguments) async {
   final String pathDir = Directory.current.path;
@@ -16,13 +14,23 @@ void main(List<String> arguments) async {
 
 /// Documentation for SearchFile
 /// This class get the files and directories from path
+/// 
+/// Example
+/// ```dart
+///  final String pathDir = Directory.current.path;
+///
+///  List<String> listaExclude = [".gitignore", ".git", "bin"];
+///
+///  print(await SearchFile()
+///      .getDirectories(path: pathDir, recursive: true, filesToExclude: listaExclude));
+///```
 class SearchFile {
   SearchFile();
 
   static const FILE = "files";
   static const DIRECTORIES = "directories";
 
-  String _getName(String path) => path.split(Path.separator).last.trim();
+//  String _getName(String path) => path.split(Path.separator).last.trim();
 
   bool _isToExclude(
       {required String pathFile, required List<String> toExclude}) {

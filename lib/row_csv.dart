@@ -1,5 +1,19 @@
-/// class for the row of csv file
+/// Documentation for lass RowCSV
+///
+/// Example
+/// 
+/// ```dart
+/// rows.add(RowCSV(
+///    id: "${Random().nextInt(500)}",
+///    idHash: "${Random().nextInt(1000)}ABC",
+///    firstElementPath: "path uno${Random().nextInt(500)}",
+///    firstElementName: "elemennto ${Random().nextInt(500)}",
+///    secondElementPath: "path dos ${Random().nextInt(500)}",
+///    secondElementName: "elemento ${Random().nextInt(500)}"));
+/// ```
 class RowCSV {
+
+
   static final String ID = "id";
   static final String ID_HASH = "id_hash";
   static final String FIRST_PATH = "first_path";
@@ -23,6 +37,10 @@ class RowCSV {
     required this.secondElementName,
   });
 
+  /// Documentation for [toList]
+  /// 
+  /// > _`@returns: [List<String>]`_ parse this class to List
+  /// 
   List<String> get toList => [
         id,
         idHash,
@@ -32,6 +50,10 @@ class RowCSV {
         secondElementName
       ];
 
+  /// Documentation for [toMap]
+  /// 
+  /// > _`@returns: [Map<String, String>]`_ parse this class to Map
+  /// 
   Map<String, String> toMap() {
     return {
       ID: id,
@@ -43,6 +65,9 @@ class RowCSV {
     };
   }
 
+  /// Documentation for getTitleRow
+  ///
+  /// > _`@returns: [RowCSV]`_ Generate the header for csv
   static RowCSV get getTitleRow => RowCSV(
       id: ID,
       idHash: ID_HASH,

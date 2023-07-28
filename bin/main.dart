@@ -20,8 +20,6 @@ void main(List<String> arguments) async {
         recursive: data[CLI.recursive],
         filesToExclude: data[CLI.exclude]);
 
-    //print("Los archivos en main: ${allFiles}");
-
     for (final fileMain in files) {
       for (final fileSecond in files) {
         if (!(fileMain.path == fileSecond.path)) {

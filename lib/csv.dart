@@ -25,6 +25,29 @@ void main(List<String> args) {
   my_csv.saveContent(rows);
 }
 
+/// Documentation for class [CSV]
+/// 
+/// Class to manage file csv to save the content
+/// Example: 
+/// 
+/// ```dart
+/// final CSV my_csv = CSV();
+///
+///  List<RowCSV> rows = [RowCSV.getTitleRow];
+///
+///  for (int x = 0; x < 200; x++) {
+///    rows.add(RowCSV(
+///        id: "${Random().nextInt(500)}",
+///        idHash: "${Random().nextInt(1000)}ABC",
+///        firstElementPath: "path uno${Random().nextInt(500)}",
+///        firstElementName: "elemennto ${Random().nextInt(500)}",
+///        secondElementPath: "path dos ${Random().nextInt(500)}",
+///        secondElementName: "elemento ${Random().nextInt(500)}"));
+///  }
+///
+///  
+///  my_csv.saveContent(rows);
+/// ```
 class CSV {
   String _pathCsv = "data.csv";
   List<String> titles = [];
@@ -48,7 +71,8 @@ class CSV {
   }
 
   /// Documentation for _listToString
-  /// parse the list to String, clear brackets []
+  /// 
+  /// parse the list to format CSV file, clear brackets \[ \]
   ///
   String _listToString(RowCSV row) {
     String content = row.toList.toString().replaceRange(0, 1, "");
@@ -56,9 +80,9 @@ class CSV {
   }
 
   /// Documentation for saveContent
-  /// > * _`@param: [List<RowCSV>]`_ - rows:
+  /// > * _`@param: [List<RowCSV>]`_ - rows: Save all list of [RosCSV]
   ///
-  /// > _`@returns: [bool]`_
+  /// > _`@returns: [bool]`_ Return `true` if saved otherwise is false
   Future<bool> saveContent(List<RowCSV> rows) async {
     String content = "";
     for (final row in rows) {
