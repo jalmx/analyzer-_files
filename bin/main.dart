@@ -9,10 +9,14 @@ void main(List<String> arguments) async {
   try {
     CLI cli = CLI(argumentsRaw: arguments);
 
-    var data = cli.getParameter();
-    // print(data);
+    if (cli.getParameter()["help"]) {
+      print(cli.usage());
+      exit(0);
+    }
 
-    // print("-----------------------");
+    var data = cli.getParameter();
+    print("Parameters: $data");
+    
     var search = SearchFile();
 
     var files = await search.getFiles(
@@ -28,9 +32,8 @@ void main(List<String> arguments) async {
 
           bool result = await Comparator.isEqual(
               pathFileOne: elements[0], pathFileTwo: elements[1]);
-          //stdout.write("\r.");
           print(getMD5("${elements[0]}${elements[1]}"));
-          
+
           if (result) {
             stdout.write(getMD5("${elements[0]}${elements[1]} -"));
             print(" el archivo ${elements[0]} <-> ${elements[1]}");
@@ -41,9 +44,7 @@ void main(List<String> arguments) async {
     print("");
     print("Done :D");
 
-    if (cli.getParameter()["help"]) {
-      print(cli.usage());
-    }
+    
     exit(0);
   } catch (e) {
     exit(1);
