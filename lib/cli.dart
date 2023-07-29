@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -19,9 +21,14 @@ class CLI {
     _results = _parse.parse(_argumentsRaw);
   }
 
+  static final OUTPUT_CSV = "csv";
+  static final OUTPUT_STDOUT = "stdout";
+  static final OUTPUT_JSON = "json";
+  static final OUTPUT_DB = "sqlite";
+
   void _build() {
     _parse = ArgParser()
-    ..addFlag("help", negatable: false, help: "Provide help")
+      ..addFlag("help", negatable: false, help: "Provide help")
       ..addOption(path,
           defaultsTo: ".",
           abbr: "p",
@@ -41,11 +48,13 @@ class CLI {
         "sha256": "Hash SHA256",
         "all": "Apply all hashes"
       })
-      ..addMultiOption(exclude,
-          abbr: "x",
-          help: "List of folders or files to exclude in search\nExample\n -x \"node_module,.gitignore,*.txt\"",
-          valueHelp: "node_module,.gitignore",
-          )
+      ..addMultiOption(
+        exclude,
+        abbr: "x",
+        help:
+            "List of folders or files to exclude in search\nExample\n -x \"node_module,.gitignore,*.txt\"",
+        valueHelp: "node_module,.gitignore",
+      )
       ..addOption(output,
           defaultsTo: "stdout",
           abbr: "o",

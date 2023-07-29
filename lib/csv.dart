@@ -9,14 +9,14 @@ import 'package:analyzer_file/row_csv.dart';
 void main(List<String> args) {
   final CSV my_csv = CSV();
 
-  List<RowCSV> rows = [RowCSV.getTitleRow];
+  List<RowCSV> rows = [];
 
   for (int x = 0; x < 200; x++) {
     rows.add(RowCSV(
-        id: "${Random().nextInt(500)}",
+        id:"${Random().nextInt(500)}",
         idHash: "${Random().nextInt(1000)}ABC",
         firstElementPath: "path uno${Random().nextInt(500)}",
-        firstElementName: "elemennto ${Random().nextInt(500)}",
+        firstElementName: "elemento ${Random().nextInt(500)}",
         secondElementPath: "path dos ${Random().nextInt(500)}",
         secondElementName: "elemento ${Random().nextInt(500)}"));
   }
@@ -37,10 +37,10 @@ void main(List<String> args) {
 ///
 ///  for (int x = 0; x < 200; x++) {
 ///    rows.add(RowCSV(
-///        id: "${Random().nextInt(500)}",
+///        "${Random().nextInt(500)}",
 ///        idHash: "${Random().nextInt(1000)}ABC",
 ///        firstElementPath: "path uno${Random().nextInt(500)}",
-///        firstElementName: "elemennto ${Random().nextInt(500)}",
+///        firstElementName: "elemento ${Random().nextInt(500)}",
 ///        secondElementPath: "path dos ${Random().nextInt(500)}",
 ///        secondElementName: "elemento ${Random().nextInt(500)}"));
 ///  }
@@ -70,12 +70,21 @@ class CSV {
     return true;
   }
 
-  /// Documentation for _listToString
+  /// Documentation for [_rowCsvToString]
   /// 
   /// parse the list to format CSV file, clear brackets \[ \]
   ///
-  String _listToString(RowCSV row) {
+  String _rowCsvToString(RowCSV row) {
     String content = row.toList.toString().replaceRange(0, 1, "");
+    return content.replaceRange(content.length - 1, null, "");
+  }
+
+  /// Documentation for [_rowCsvToString]
+  /// 
+  /// parse the list to format CSV file, clear brackets \[ \]
+  ///
+  String _listToString(List<String> row) {
+    String content = row.toString().replaceRange(0, 1, "");
     return content.replaceRange(content.length - 1, null, "");
   }
 
@@ -84,9 +93,9 @@ class CSV {
   ///
   /// > _`@returns: [bool]`_ Return `true` if saved otherwise is false
   Future<bool> saveContent(List<RowCSV> rows) async {
-    String content = "";
+    String content = "${_listToString(RowCSV.getTitleRow)}\n";
     for (final row in rows) {
-      content += "${_listToString(row)}\n";
+      content += "${_rowCsvToString(row)}\n";
     }
     await _save(content);
     return true;
