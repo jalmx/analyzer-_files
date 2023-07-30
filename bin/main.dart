@@ -19,7 +19,7 @@ void main(List<String> arguments) async {
 
     var data = cli.getParameter();
     // print("Parameters: $data");
-    //exit(0);
+    // exit(0);
 
     var search = SearchFile();
 
@@ -43,9 +43,9 @@ void main(List<String> arguments) async {
 
           // print("id hash: $idHash");
 
-          if (equal) {
-            // stdout.write(getMD5("${elements[0]}${elements[1]} -"));
-            // print(" el archivo ${elements[0]} <-> ${elements[1]}");
+          if (equal && data[CLI.output] == CLI.OUTPUT_STDOUT) {
+            stdout.write(getMD5("${elements[0]}${elements[1]} -"));
+            print(" el archivo ${elements[0]} <-> ${elements[1]}");
           }
 
           if (data[CLI.output] == CLI.OUTPUT_CSV) {
@@ -65,7 +65,7 @@ void main(List<String> arguments) async {
       final String pathSaved = await saveCSV(null, rowsMap: rows);
       print("save on ${Path.absolute(pathSaved)}");
       }
-    print("Done :D");
+    
     exit(0);
   } catch (e) {
     exit(1);
