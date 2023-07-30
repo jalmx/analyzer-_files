@@ -39,3 +39,28 @@ analyzer <path> -x ".gitignore,node_modules" -r
           [sqlite]                        Save in db SQLite
           [stdout] (default)              Throw to terminal
 ```
+
+## Install in Linux
+
+Install to `$USER/.local/bin`
+
+```bash
+wget https://raw.githubusercontent.com/jalmx/analyzer_files/master/release/analyzer_lastest -O $HOME/.local/bin/analyzer
+```
+
+Make executable
+
+```bash
+sudo chmod +x /$HOME/.local/bin/analyzer
+```
+
+
+## Create a release
+
+### Step 1
+
+Download repository with git
+
+```bash
+git clone 
+```

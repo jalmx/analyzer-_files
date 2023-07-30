@@ -1,5 +1,9 @@
 #! /bin/bash
 
+VERSION=$(cat VERSION)
+
+echo "const String VERSION = '$VERSION';" > lib/version.dart
+
 FOLDER_RELEASE="release"
 dart compile exe bin/main.dart
 
@@ -11,11 +15,11 @@ mv bin/main.exe $FOLDER_RELEASE/
 
 mv $FOLDER_RELEASE/main.exe $FOLDER_RELEASE/analyze
 
-VERSION=$RANDOM
+NUMBER=$RANDOM
 
-mv $FOLDER_RELEASE/analyze $FOLDER_RELEASE/analyzer_$VERSION
-cp $FOLDER_RELEASE/analyzer_$VERSION $FOLDER_RELEASE/analyzer_lastest
+mv $FOLDER_RELEASE/analyze $FOLDER_RELEASE/analyzer_$NUMBER
+cp $FOLDER_RELEASE/analyzer_$NUMBER $FOLDER_RELEASE/analyzer_lastest
 
-git add $FOLDER_RELEASE/* && git commit -m "realese: v0.0.2=> $VERSION"   
+git add $FOLDER_RELEASE/* && git commit -m "realese: $VERSION=> $NUMBER"   
 
 sudo chmod +x $FOLDER_RELEASE/*

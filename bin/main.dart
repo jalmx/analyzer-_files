@@ -1,11 +1,13 @@
 import 'dart:io';
 
 import 'package:analyzer_file/cli.dart';
+import 'package:analyzer_file/info.dart';
 import 'package:analyzer_file/row_csv.dart';
 import 'package:analyzer_file/save_file.dart';
 import 'package:analyzer_file/search.dart';
 import 'package:analyzer_file/comparator.dart';
 import 'package:analyzer_file/hasher.dart';
+import 'package:analyzer_file/version.dart';
 import 'package:path/path.dart' as Path;
 
 void main(List<String> arguments) async {
@@ -14,6 +16,9 @@ void main(List<String> arguments) async {
 
     if (cli.getParameter()["help"]) {
       print(cli.usage());
+      print(VERSION);
+      print(REPOSITORY);
+      print(INFO);
       exit(0);
     }
 
@@ -28,7 +33,7 @@ void main(List<String> arguments) async {
         recursive: data[CLI.recursive],
         filesToExclude: data[CLI.exclude]);
 
-    Map<String,RowCSV> rows = {};
+    Map<String, RowCSV> rows = {};
 
     for (final fileMain in files) {
       for (final fileSecond in files) {
@@ -64,8 +69,8 @@ void main(List<String> arguments) async {
     if (data[CLI.output] == CLI.OUTPUT_CSV) {
       final String pathSaved = await saveCSV(null, rowsMap: rows);
       print("save on ${Path.absolute(pathSaved)}");
-      }
-    
+    }
+
     exit(0);
   } catch (e) {
     exit(1);
