@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:analyzer_file/csv.dart';
 import 'package:analyzer_file/to_json.dart';
 
