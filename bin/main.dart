@@ -52,7 +52,7 @@ void main(List<String> arguments) async {
           }
 
           if (!(data[CLI.output] == CLI.OUTPUT_STDOUT)) {
-            stdout.write("\rElements to analyzed :${count++}");
+            stdout.write("\rElements analyzed :${count++}");
             rows[idHash] = Element(
                 idHash: idHash,
                 firstElementPath: elements[0],
