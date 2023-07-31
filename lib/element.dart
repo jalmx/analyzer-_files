@@ -50,7 +50,7 @@ class Element {
         firstElementPath,
         firstElementName,
         secondElementPath,
-        secondElementName, 
+        secondElementName,
         equal
       ];
 
@@ -69,6 +69,8 @@ class Element {
       EQUAL: equal
     };
   }
+
+  Map<String, dynamic> toJSON() => toMap();
 
   /// Documentation for getTitleRow
   ///

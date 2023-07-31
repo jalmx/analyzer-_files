@@ -70,7 +70,9 @@ void main(List<String> arguments) async {
       print("\nsave on ${Path.absolute(pathSaved)}");
       print("Rows total: ${rows.length}");
     } else if (data[CLI.output] == CLI.OUTPUT_JSON) {
-      print("yet without implement :(");
+      final String pathSaved = await saveJSON(null, rowsMap: rows);
+      print("\nJSON file saved in: $pathSaved");
+      print("Rows objects: ${rows.length}");
     } else if (data[CLI.output] == CLI.OUTPUT_DB) {
       print("yet without implement :(");
     }

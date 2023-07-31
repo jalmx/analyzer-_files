@@ -14,11 +14,13 @@ mkdir -p $FOLDER_RELEASE
 
 mv bin/main.exe $FOLDER_RELEASE/
 
-mv $FOLDER_RELEASE/main.exe $FOLDER_RELEASE/analyze
+mv $FOLDER_RELEASE/main.exe $FOLDER_RELEASE/analyzer
 
-mv $FOLDER_RELEASE/analyze $FOLDER_RELEASE/analyzer_$NUMBER
+mv $FOLDER_RELEASE/analyzer $FOLDER_RELEASE/analyzer_$NUMBER
 cp $FOLDER_RELEASE/analyzer_$NUMBER $FOLDER_RELEASE/analyzer_lastest
 
 git add $FOLDER_RELEASE/* && git commit -m "realese: $VERSION=> $NUMBER"   
 
-sudo chmod +x $FOLDER_RELEASE/*
+echo "copy file $FOLDER_RELEASE/analyzer_lastest to $HOME/.local/bin/analyzer"
+echo "and make executable => sudo chmod +x $HOME/.local/bin/analyzer"
+#sudo chmod +x $FOLDER_RELEASE/*
