@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:analyzer_file/row_csv.dart';
+import 'package:analyzer_file/element.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
@@ -9,10 +9,10 @@ import 'package:analyzer_file/row_csv.dart';
 void main(List<String> args) {
   final CSV my_csv = CSV();
 
-  List<RowCSV> rows = [];
+  List<Element> rows = [];
 
   for (int x = 0; x < 200; x++) {
-    rows.add(RowCSV(
+    rows.add(Element(
         id:"${Random().nextInt(500)}",
         idHash: "${Random().nextInt(1000)}ABC",
         firstElementPath: "path uno${Random().nextInt(500)}",
@@ -74,7 +74,7 @@ class CSV {
   /// 
   /// parse the list to format CSV file, clear brackets \[ \]
   ///
-  String _rowCsvToString(RowCSV row) {
+  String _rowCsvToString(Element row) {
     String content = row.toList.toString().replaceRange(0, 1, "");
     return content.replaceRange(content.length - 1, null, "");
   }
@@ -92,8 +92,8 @@ class CSV {
   /// > * _`@param: [List<RowCSV>]`_ - rows: Save all list of [RosCSV]
   ///
   /// > _`@returns: [bool]`_ Return `true` if saved otherwise is false
-  Future<bool> saveContent(List<RowCSV> rows) async {
-    String content = "${_listToString(RowCSV.getTitleRow)}\n";
+  Future<bool> saveContent(List<Element> rows) async {
+    String content = "${_listToString(Element.getTitleRow)}\n";
     for (final row in rows) {
       content += "${_rowCsvToString(row)}\n";
     }

@@ -1,8 +1,10 @@
+// ignore_for_file: library_prefixes
+
 import 'dart:io';
 
 import 'package:analyzer_file/cli.dart';
 import 'package:analyzer_file/info.dart';
-import 'package:analyzer_file/row_csv.dart';
+import 'package:analyzer_file/element.dart';
 import 'package:analyzer_file/save_file.dart';
 import 'package:analyzer_file/search.dart';
 import 'package:analyzer_file/comparator.dart';
@@ -16,9 +18,7 @@ void main(List<String> arguments) async {
 
     if (cli.getParameter()["help"]) {
       print(cli.usage());
-      print(VERSION);
-      print(REPOSITORY);
-      print(INFO);
+      printInformation();
       exit(0);
     }
 
@@ -32,8 +32,8 @@ void main(List<String> arguments) async {
         path: data[CLI.path],
         recursive: data[CLI.recursive],
         filesToExclude: data[CLI.exclude]);
-
-    Map<String, RowCSV> rows = {};
+    int count = 1;
+    Map<String, Element> rows = {};
 
     for (final fileMain in files) {
       for (final fileSecond in files) {
@@ -46,15 +46,14 @@ void main(List<String> arguments) async {
 
           final idHash = getMD5("${elements[0]}${elements[1]}");
 
-          // print("id hash: $idHash");
-
           if (equal && data[CLI.output] == CLI.OUTPUT_STDOUT) {
-            stdout.write(getMD5("${elements[0]}${elements[1]} -"));
-            print(" el archivo ${elements[0]} <-> ${elements[1]}");
+            stdout.write(getMD5("hash: ${elements[0]}${elements[1]} -"));
+            print(" are the same files: ${elements[0]} <-> ${elements[1]}");
           }
 
-          if (data[CLI.output] == CLI.OUTPUT_CSV) {
-            rows[idHash] = RowCSV(
+          if (!(data[CLI.output] == CLI.OUTPUT_STDOUT)) {
+            stdout.write("\rElements to analyzed :${count++}");
+            rows[idHash] = Element(
                 idHash: idHash,
                 firstElementPath: elements[0],
                 firstElementName: elements[0].split(Path.separator).last,
@@ -68,11 +67,23 @@ void main(List<String> arguments) async {
 
     if (data[CLI.output] == CLI.OUTPUT_CSV) {
       final String pathSaved = await saveCSV(null, rowsMap: rows);
-      print("save on ${Path.absolute(pathSaved)}");
+      print("\nsave on ${Path.absolute(pathSaved)}");
+      print("Rows total: ${rows.length}");
+    } else if (data[CLI.output] == CLI.OUTPUT_JSON) {
+      print("yet without implement :(");
+    } else if (data[CLI.output] == CLI.OUTPUT_DB) {
+      print("yet without implement :(");
     }
 
     exit(0);
   } catch (e) {
     exit(1);
   }
+}
+
+void printInformation() {
+  print("");
+  print(VERSION);
+  print(REPOSITORY);
+  print(INFO);
 }

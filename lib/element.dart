@@ -9,12 +9,12 @@
 ///    id: "${Random().nextInt(500)}",
 ///    idHash: "${Random().nextInt(1000)}ABC",
 ///    firstElementPath: "path uno${Random().nextInt(500)}",
-///    firstElementName: "elemennto ${Random().nextInt(500)}",
+///    firstElementName: "elemento ${Random().nextInt(500)}",
 ///    secondElementPath: "path dos ${Random().nextInt(500)}",
 ///    secondElementName: "elemento ${Random().nextInt(500)}"));
 /// ```
 
-class RowCSV {
+class Element {
   static final String ID = "id";
   static final String ID_HASH = "id_hash";
   static final String FIRST_PATH = "first_path";
@@ -31,7 +31,7 @@ class RowCSV {
   final String secondElementName;
   bool equal;
 
-  RowCSV(
+  Element(
       {required this.idHash,
       required this.firstElementPath,
       required this.firstElementName,

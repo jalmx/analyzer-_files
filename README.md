@@ -8,7 +8,12 @@ en caso que existan repetidos, lo indica en un archivo, con su nombre y ruta, lo
 
 ```bash
 # It will search inside the path and exclude all files .gitignore and archivo.txt
-analyzer  <path> -x ".gitignore,archivo.txt" -r
+analyzer <path> -x ".gitignore,archivo.txt" -r
+```
+
+```bash
+# It will search inside the path, this help to know if you have the same files in your libs
+analyzer <path> $HOME/Arduino -r  
 ```
 
 ```bash
@@ -42,25 +47,39 @@ analyzer <path> -x ".gitignore,node_modules" -r
 
 ## Install in Linux
 
+You have in your `PATH` => `$USER/.local/bin` 
+
 Install to `$USER/.local/bin`
 
 ```bash
+# download bin
 wget https://raw.githubusercontent.com/jalmx/analyzer_files/master/release/analyzer_lastest -O $HOME/.local/bin/analyzer
-```
 
-Make executable
-
-```bash
+# Make executable
 sudo chmod +x /$HOME/.local/bin/analyzer
 ```
 
+## Steps to create a bin
 
-## Create a release
-
-### Step 1
-
-Download repository with git
+Download repository
 
 ```bash
-git clone 
+git clone https://github.com/jalmx/analyzer_files
+```
+Change to folder
+
+```bash
+cd ./analyzer_files
+```
+
+Download the dependencies
+
+```bash
+dart pub get
+```
+
+Compile to bin
+
+```bash
+dart compile exe bin/main.dart
 ```

@@ -4,7 +4,7 @@ import 'package:analyzer_file/hasher.dart';
 /// 
 /// The constructor is private, you don't need to create a instance
 /// 
-/// Just to invocate a method [isEqual]  
+/// Just to invocation method [isEqual]
 /// to compare two `hash` if are equal 
 /// 
 class Comparator {
