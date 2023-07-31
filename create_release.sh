@@ -1,8 +1,9 @@
 #! /bin/bash
 
 VERSION=$(cat VERSION)
+NUMBER=$RANDOM
 
-echo "const String VERSION = '$VERSION';" > lib/version.dart
+echo "const String VERSION = '$VERSION => $RANDOM';" > lib/version.dart
 
 FOLDER_RELEASE="release"
 dart compile exe bin/main.dart
@@ -14,8 +15,6 @@ mkdir -p $FOLDER_RELEASE
 mv bin/main.exe $FOLDER_RELEASE/
 
 mv $FOLDER_RELEASE/main.exe $FOLDER_RELEASE/analyze
-
-NUMBER=$RANDOM
 
 mv $FOLDER_RELEASE/analyze $FOLDER_RELEASE/analyzer_$NUMBER
 cp $FOLDER_RELEASE/analyzer_$NUMBER $FOLDER_RELEASE/analyzer_lastest
