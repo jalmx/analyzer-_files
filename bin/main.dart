@@ -23,8 +23,6 @@ void main(List<String> arguments) async {
     }
 
     var data = cli.getParameter();
-    // print("Parameters: $data");
-    // exit(0);
 
     var search = SearchFile();
 
@@ -50,9 +48,9 @@ void main(List<String> arguments) async {
             stdout.write(getMD5("hash: ${elements[0]}${elements[1]} -"));
             print(" are the same files: ${elements[0]} <-> ${elements[1]}");
           }
-
+          count++;
           if (!(data[CLI.output] == CLI.OUTPUT_STDOUT)) {
-            stdout.write("\rElements analyzed :${count++}");
+            stdout.write("\rElements analyzed: $count");
             rows[idHash] = Element(
                 idHash: idHash,
                 firstElementPath: elements[0],
@@ -67,18 +65,22 @@ void main(List<String> arguments) async {
 
     if (data[CLI.output] == CLI.OUTPUT_CSV) {
       final String pathSaved = await saveCSV(null, rowsMap: rows);
-      print("\nsave on ${Path.absolute(pathSaved)}");
+      print("\nCSV saved on ${Path.absolute(pathSaved)}");
       print("Rows total: ${rows.length}");
     } else if (data[CLI.output] == CLI.OUTPUT_JSON) {
       final String pathSaved = await saveJSON(null, rowsMap: rows);
-      print("\nJSON file saved in: $pathSaved");
-      print("Rows objects: ${rows.length}");
+      print("\nJSON file saved on: ${Path.absolute(pathSaved)}");
+      print("JSON's: ${rows.length}");
     } else if (data[CLI.output] == CLI.OUTPUT_DB) {
       print("yet without implement :(");
+    } else {
+      print("\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
     }
 
     exit(0);
   } catch (e) {
+    print("Error");
+    print("Use analyzer --help to know more");
     exit(1);
   }
 }
