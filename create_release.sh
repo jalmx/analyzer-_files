@@ -3,7 +3,7 @@
 VERSION=$(cat VERSION)
 NUMBER=$RANDOM
 
-echo "const String VERSION = '$VERSION => $RANDOM';" > lib/version.dart
+echo "const String VERSION = '$VERSION => $NUMBER';" > lib/version.dart
 
 FOLDER_RELEASE="release"
 dart compile exe bin/main.dart
