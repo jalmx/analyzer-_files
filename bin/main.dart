@@ -30,7 +30,7 @@ void main(List<String> arguments) async {
         path: data[CLI.path],
         recursive: data[CLI.recursive],
         filesToExclude: data[CLI.exclude]);
-    int count = 1;
+    double count = 1.0;
     Map<String, Element> rows = {};
 
     for (final fileMain in files) {
