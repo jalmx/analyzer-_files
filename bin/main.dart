@@ -32,7 +32,7 @@ void main(List<String> arguments) async {
         filesToExclude: data[CLI.exclude]);
     double count = 1.0;
     Map<String, Element> rows = {};
-
+    print("start");
     for (final fileMain in files) {
       for (final fileSecond in files) {
         if (!(fileMain.path == fileSecond.path)) {
@@ -50,7 +50,7 @@ void main(List<String> arguments) async {
           }
           count++;
           if (!(data[CLI.output] == CLI.OUTPUT_STDOUT)) {
-            stdout.write("\rElements analyzed: $count");
+            stdout.write("\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
             rows[idHash] = Element(
                 idHash: idHash,
                 firstElementPath: elements[0],
@@ -76,7 +76,7 @@ void main(List<String> arguments) async {
     } else {
       print("\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
     }
-
+    print("Done");
     exit(0);
   } catch (e) {
     print("Error");
