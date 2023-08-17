@@ -53,10 +53,10 @@ void main(List<String> arguments) async {
             stdout.write("\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
             rows[idHash] = Element(
                 idHash: idHash,
-                firstElementPath: elements[0],
-                firstElementName: elements[0].split(Path.separator).last,
-                secondElementPath: elements[1],
-                secondElementName: elements[1].split(Path.separator).last,
+                firstElementPath: "\"${elements[0]}\"",
+                firstElementName: "\"${elements[0].split(Path.separator).last}\"",
+                secondElementPath: "\"${elements[1]}\"",
+                secondElementName: "\"${elements[1].split(Path.separator).last}\"",
                 equal: equal);
           }
         }
