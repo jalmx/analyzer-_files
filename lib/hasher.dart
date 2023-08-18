@@ -16,6 +16,16 @@ String getMD5(String s) {
   return crypto.md5.convert(utf8.encode(s)).toString();
 }
 
+
+/// Documentation for getSHA256
+/// > * _`@param: [String]`_ - s: Is a string to generate a has 
+/// `MD5`
+/// 
+/// > _`@returns: [String]`_: Return the hash `sha256` from string
+String getSHA256(String s) {
+  return crypto.sha256.convert(utf8.encode(s)).toString();
+}
+
 /// Documentation for [getHashOfFile256]
 /// > * _`@param: [String]`_ - path: This is the path from
 ///  file, with hash `SHA256`

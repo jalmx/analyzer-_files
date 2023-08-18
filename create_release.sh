@@ -22,6 +22,6 @@ cp $FOLDER_RELEASE/analyzer_$NUMBER $FOLDER_RELEASE/analyzer_lastest
 echo "copy file $FOLDER_RELEASE/analyzer_lastest to $HOME/.local/bin/analyzer"
 echo "and make executable => sudo chmod +x $HOME/.local/bin/analyzer"
 
-git add $FOLDER_RELEASE/* && git commit -m "realese: $VERSION=> $NUMBER"
+git add . && git commit -m "realese: $VERSION=> $NUMBER"
 
 echo "commit done"

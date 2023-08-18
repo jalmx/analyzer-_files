@@ -33,7 +33,6 @@ analyzer <path> -x ".gitignore,node_modules" -r -o json
                                           (defaults to ".")
 -r, --recursive                           Search into directory
 -h, --hash                                
-          [all]                           Apply all hashes
           [md5]                           Hash MD5
           [sha256] (default)              Hash SHA256
 

@@ -24,7 +24,12 @@ class CLI {
   static final OUTPUT_CSV = "csv";
   static final OUTPUT_STDOUT = "stdout";
   static final OUTPUT_JSON = "json";
-  static final OUTPUT_DB = "sqlite";
+
+  /// Return string "sha256"
+  static final SHA256 = "sha256";
+
+  /// Return string "md5"
+  static final MD5 = "md5";
 
   void _build() {
     _parse = ArgParser()
@@ -42,11 +47,9 @@ class CLI {
       ..addOption(hash, abbr: "h", defaultsTo: "sha256", allowed: [
         "md5",
         "sha256",
-        "-all"
       ], allowedHelp: {
-        "md5": "Hash MD5",
-        "sha256": "Hash SHA256",
-        "all": "Apply all hashes"
+        MD5: "Hash ${MD5.toUpperCase()}",
+        SHA256: "Hash ${SHA256.toUpperCase()}",
       })
       ..addMultiOption(
         exclude,
@@ -62,8 +65,7 @@ class CLI {
           valueHelp: "csv",
           allowed: [
             "json",
-            "csv",
-            "sqlite"
+            "csv"
           ],
           allowedHelp: {
             "json": "Save file array json",

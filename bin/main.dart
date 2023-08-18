@@ -42,21 +42,26 @@ void main(List<String> arguments) async {
           bool equal = await Comparator.isEqual(
               pathFileOne: elements[0], pathFileTwo: elements[1]);
 
-          final idHash = getMD5("${elements[0]}${elements[1]}");
+          final namesConcatenated = "${elements[0]}${elements[1]}";
+          final idHash =
+              data[CLI.hash] == CLI.MD5 ? getMD5(namesConcatenated) : getSHA256(namesConcatenated);
 
           if (equal && data[CLI.output] == CLI.OUTPUT_STDOUT) {
-            stdout.write(getMD5("hash: ${elements[0]}${elements[1]} -"));
+            stdout.write("hash: $idHash - ");
             print(" are the same files: ${elements[0]} <-> ${elements[1]}");
           }
           count++;
           if (!(data[CLI.output] == CLI.OUTPUT_STDOUT)) {
-            stdout.write("\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
+            stdout.write(
+                "\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
             rows[idHash] = Element(
                 idHash: idHash,
                 firstElementPath: "\"${elements[0]}\"",
-                firstElementName: "\"${elements[0].split(Path.separator).last}\"",
+                firstElementName:
+                    "\"${elements[0].split(Path.separator).last}\"",
                 secondElementPath: "\"${elements[1]}\"",
-                secondElementName: "\"${elements[1].split(Path.separator).last}\"",
+                secondElementName:
+                    "\"${elements[1].split(Path.separator).last}\"",
                 equal: equal);
           }
         }
@@ -71,8 +76,6 @@ void main(List<String> arguments) async {
       final String pathSaved = await saveJSON(null, rowsMap: rows);
       print("\nJSON file saved on: ${Path.absolute(pathSaved)}");
       print("JSON's: ${rows.length}");
-    } else if (data[CLI.output] == CLI.OUTPUT_DB) {
-      print("yet without implement :(");
     } else {
       print("\rElements analyzed: ${(count++ ~/ 2 == 0 ? 1 : count++ ~/ 2)}");
     }
