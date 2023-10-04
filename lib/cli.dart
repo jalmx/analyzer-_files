@@ -70,7 +70,6 @@ class CLI {
           allowedHelp: {
             "json": "Save file array json",
             "csv": "Save file csv",
-            "sqlite": "Save in db SQLite",
             "stdout": "Throw to terminal"
           });
   }
